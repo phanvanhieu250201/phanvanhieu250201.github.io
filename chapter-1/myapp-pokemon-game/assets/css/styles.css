@@ -475,6 +475,7 @@ https://github.com/animate-css/animate.css/blob/main/source/attention_seekers/sh
 /**************************/
 
 .game-data {
+  margin-top: 10px;
   display: flex;
   justify-content: center;
 }
@@ -508,10 +509,30 @@ https://github.com/animate-css/animate.css/blob/main/source/attention_seekers/sh
   animation: shakeY 1s ease-in-out forwards;
 }
 
+.game-data__corrects {
+  color: var(--color-white);
+  border: 0.2rem solid var(--color-white);
+  background-color: green;
+}
+
 .game-data__fails {
   color: var(--color-white);
   border: 0.2rem solid var(--color-white);
   background-color: var(--color-error--darken);
+}
+
+/* bổ sung */
+.score-text {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+.fail-text {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
 }
 
 .game-data__counter {

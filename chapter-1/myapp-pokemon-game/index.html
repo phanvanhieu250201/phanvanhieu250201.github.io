@@ -76,9 +76,14 @@
             </svg>
             <span class="game-options__text"> 10 </span></label
           >
-          <p>Score: {{score}}</p>
-          <p>Lượt chơi: {{chooseCount}}</p>
+
         </form>
+        <div class="game-data">
+          <p class="score-text">Score: {{score}}</p>
+        </div>
+        <div class="game-data">
+          <p class="fail-text">Turns left: {{chooseCount}}</p>
+        </div>
         <ul class="game-list-cards">
           <li v-for="(item,index) in listcard" :class="['game-card', {'is-covered': active[index]}]"  :key="index"  @click="handleActive(index, item.name)">
             <div class="game-card__face game-card-front">
@@ -93,7 +98,8 @@
 
         </ul>
         <button class="button button--game" @click="handleResetGame">Reset Game</button>
-        <div class="game-result game-result--win">Win</div>
+        <div v-if="score == countModeGame" class="game-result game-result--win">Win</div>
+        <div v-if="chooseCount == 0" class="game-result game-result--lose">Lose</div>
         <!---->
       </div>
       <!---->

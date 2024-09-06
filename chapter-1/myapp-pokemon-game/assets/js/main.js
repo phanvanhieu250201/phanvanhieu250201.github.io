@@ -31,7 +31,7 @@ let listcardfour = [
     name:"gastly",
     image:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png",
   },
-];
+].sort(() => Math.random() - 0.5);
 let listcardsix = [
   {
     name:"spearow",
@@ -81,7 +81,7 @@ let listcardsix = [
     name:"charmande",
     image:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
   },
-];
+].sort(() => Math.random() - 0.5);
 let listcardeight = [
   {
     name:"spearow",
@@ -147,7 +147,7 @@ let listcardeight = [
     name:"nidorino",
     image:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/32.png",
   },
-];
+].sort(() => Math.random() - 0.5);
 let listcardten = [
   {
     name:"spearow",
@@ -229,7 +229,7 @@ let listcardten = [
     name:"zubat",
     image:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/41.png",
   },
-];
+].sort(() => Math.random() - 0.5);
 Vue.createApp({
     data() {
       return {
@@ -242,84 +242,76 @@ Vue.createApp({
         vitri:"",
         vitriold:"",
         canClick: true, // Cho phép lật thẻ hay không
-        chooseCount: 10,
+        chooseCount: 4,
       }
     },
     methods:{
         SelectModeGame(count){
             this.countModeGame = count;
             
-            console.log(this.countModeGame)
             if(count == 4){
+              listcardfour.sort(() => Math.random() - 0.5);
               this.listcard = listcardfour;
+              this.chooseCount = 4;
             }
             else if(count == 6){
+              listcardsix.sort(() => Math.random() - 0.5);
               this.listcard = listcardsix;
+              this.chooseCount = 6;
             }
             else if(count == 8){
+              listcardeight.sort(() => Math.random() - 0.5);
               this.listcard = listcardeight;
+              this.chooseCount = 8;
             }
             else if(count == 10){
+              listcardten.sort(() => Math.random() - 0.5);
               this.listcard = listcardten;
+              this.chooseCount = 10;
             }
             this.active = new Array(this.listcard.length).fill(true);
+
+            
         },
         handleResetGame(){
-            console.log(this.countModeGame)
+          console.log('this.countModeGame',this.countModeGame)
+          if(this.countModeGame == 4){
+            listcardfour.sort(() => Math.random() - 0.5);
+            this.listcard = listcardfour;
+            this.chooseCount = 4;
+          }
+          else if(this.countModeGame == 6){
+            listcardsix.sort(() => Math.random() - 0.5);
+            this.listcard = listcardsix;
+            this.chooseCount = 6;
+          }
+          else if(this.countModeGame == 8){
+            listcardeight.sort(() => Math.random() - 0.5);
+            this.listcard = listcardeight;
+            this.chooseCount = 8;
+          }
+          else if(this.countModeGame == 10){
+            listcardten.sort(() => Math.random() - 0.5);
+            this.listcard = listcardten;
+            this.chooseCount = 10;
+          }
+          this.active = new Array(this.listcard.length).fill(true);
+
+          this.nameold = "";
+            this.name = "";
+            this.score = 0;
+            this.vitri = "";
+            this.vitriold = "";
+            this.canClick = true;
+            
         },
-        // handleActive(index, name){
-        //   //console.log(name)
-        //   this.active[index] = false;
-        //   this.nameold = this.name;
-        //   this.vitriold = this.vitri;
-        //   this.name = name;
-        //   this.vitri = index;
-
-        //   console.log("this.score",this.score)
-        //   console.log("this.name",this.name)
-        //   console.log("this.nameold",this.nameold)
-        //   console.log("this.vitri",this.vitri)
-        //   console.log("this.vitriold",this.vitriold)
-
-        //   if(this.nameold == this.name){
-        //     this.score++;
-        //     this.name = "";
-        //     this.nameold = "";
-        //     this.vitri = "";
-        //     this.vitriold = "";
-        //   }
-        //   else{
-        //     setTimeout(() => {
-        //       if(this.vitriold >= 0){
-        //         this.active[this.vitriold] = true;
-        //       }
-        //       if(this.vitri != ""){
-        //         this.active[this.vitri] = true;
-        //       }             
-        //     }, 1000);
-        //   }
-        //   // if(this.name == ""){
-        //   //   this.name = name;
-        //   // }
-        //   // else{
-        //   //   if(this.name == name){
-        //   //     this.score++;
-              
-        //   //   }
-        //   //   else{
-        //   //     setTimeout(() => {
-        //   //       this.active[index] = true;
-        //   //     }, 1000);           
-        //   //   }
-        //   //   this.name = "";  
-        //   // }
-        //   // console.log(this.countChoose)
-        //   // console.log(this.score)
-
-        // }
         handleActive(index, name) {
           // Kiểm tra nếu không thể click (đang chờ)
           if (!this.canClick || !this.active[index]) return;
+
+          if(this.chooseCount == 0){
+            return;
+          }
     
           this.active[index] = false;
           this.nameold = this.name;
@@ -353,32 +345,7 @@ Vue.createApp({
               this.chooseCount--;
             }, 1000);
           }
+          
         }
-    },
-    // watch:{
-    //   name(newValue, oldValue1){
-    //     console.log("newValue",newValue)
-    //     console.log("oldValue",oldValue1)
-    //     this.name = "";
-
-    //   },
-    //   vitri(newValue, oldValue1){
-    //     console.log("newValue",newValue)
-    //     console.log("oldValue",oldValue1)
-    //   },
-    // }
-    computed: {
-      combinedWatcher() {
-        console.log(this.name);
-        console.log(this.vitri);
-
-        // return {
-        //   name: this.name,
-        //   vitri: this.vitri,
-        // };
-        // if(this.name == ""){
-
-        // }
-      }
     },
   }).mount('#app')
